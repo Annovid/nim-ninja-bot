@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "nim-ninja-bot"
+version = "1.0.0"
+description = ""
+authors = ["Annovid <nil.nil532@gmail.com>"]
+readme = "README.md"
+packages = [{include = "nim_ninja_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.4.0"
+pydantic = "^2.3.0"
+telebot = "^0.0.5"
+pydantic-settings = "^2.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

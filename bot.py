@@ -1,9 +1,7 @@
 import telebot
-from telebot import types
-import sec
 
-TOKEN = "6330444469:AAG3T1yBMKj1Wir7iKwpERk_6mFfpySuVTA"
-MY_ID = 491372273
+import sec
+from settings import settings
 
 problems = {
     "1.1": [2, 3, 4],
@@ -53,14 +51,14 @@ class User:
 
 
 def keyboard(buttons):
-    markup = types.ReplyKeyboardMarkup()
+    markup = telebot.types.ReplyKeyboardMarkup()
     for i in range(len(buttons)):
-        buttons[i] = types.KeyboardButton(buttons[i])
+        buttons[i] = telebot.types.KeyboardButton(buttons[i])
         markup.add(buttons[i])
     return markup
 
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(settings.TOKEN)
 
 
 @bot.message_handler(commands=['start'])
@@ -74,15 +72,12 @@ def send_welcome(message):
 
 @bot.message_handler(commands=["safe"])
 def safe_all(message):
-    if message.chat.id != MY_ID:
-        return 0
+    return 0
 
 
 @bot.message_handler(content_types=['text'])
-def lalala(message):
-    try:
-        Users[message.chat.id]
-    except:
+def message_handler(message):
+    if not message.chat.id in Users.keys():
         bot.send_message(message.chat.id, "Чтобы начать, введите /start")
         return 0
     if Users[message.chat.id].status == "menu_1" and message.text == "Играть":
@@ -153,7 +148,3 @@ def lalala(message):
                 board = keyboard(["Вернуться", "Ещё раз"])
                 bot.send_message(message.chat.id, "Я победил", reply_markup=board)
                 Users[message.chat.id].pos = []
-
-
-# RUN
-bot.polling(none_stop=True)
