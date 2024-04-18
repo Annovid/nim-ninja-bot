@@ -6,3 +6,4 @@ services:
     environment:
       - DEBUG=${DEBUG}
       - TOKEN=${TOKEN}
+    restart: always
