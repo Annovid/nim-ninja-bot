@@ -31,9 +31,9 @@ def nim_do_move(position: list[int]):
             position[row] += num
 
 
-def print_nim(pos: list[int]):
+def print_nim(position: list[int]):
     text = ""
-    for row, count in enumerate(pos):
+    for row, count in enumerate(position):
         text += str(row + 1) + ") " + emoji * count + "\n"
     return text
 

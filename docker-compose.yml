@@ -1,7 +1,8 @@
 version: '3'
 
 services:
-  bot:
+  app:
     build: .
     environment:
+      - DEBUG=${DEBUG}
       - TOKEN=${TOKEN}

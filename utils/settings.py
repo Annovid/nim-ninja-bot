@@ -6,6 +6,7 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
+    DEBUG: bool = False
     TOKEN: str
 
 
