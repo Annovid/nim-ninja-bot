@@ -20,6 +20,31 @@ const TinyGraph = () => (
   </svg>
 );
 
+const Graph21 = () => (
+  <svg viewBox="0 0 360 380" className="sol-graph" aria-label="Граф позиций, достижимых из (2, 1), с раскраской L/W">
+    <defs>
+      <marker id="sol-arrow-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+    <line x1="163" y1="59" x2="117" y2="111" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="197" y1="59" x2="243" y2="111" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="170" y1="64" x2="110" y2="216" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="100" y1="156" x2="100" y2="214" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="121" y1="145" x2="239" y2="225" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="260" y1="156" x2="260" y2="214" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="251" y1="154" x2="189" y2="316" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="116" y1="260" x2="164" y2="320" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <line x1="244" y1="260" x2="196" y2="320" stroke="currentColor" strokeWidth="2" markerEnd="url(#sol-arrow-21)" />
+    <g className="graph-node graph-W"><circle cx="180" cy="40" r="26" /><text x="180" y="38" textAnchor="middle">(2,1)</text><text x="180" y="55" textAnchor="middle" className="tag">W</text></g>
+    <g className="graph-node graph-L"><circle cx="100" cy="130" r="26" /><text x="100" y="128" textAnchor="middle">(1,1)</text><text x="100" y="145" textAnchor="middle" className="tag">L</text></g>
+    <g className="graph-node graph-W"><circle cx="260" cy="130" r="26" /><text x="260" y="128" textAnchor="middle">(2,0)</text><text x="260" y="145" textAnchor="middle" className="tag">W</text></g>
+    <g className="graph-node graph-W"><circle cx="100" cy="240" r="26" /><text x="100" y="238" textAnchor="middle">(0,1)</text><text x="100" y="255" textAnchor="middle" className="tag">W</text></g>
+    <g className="graph-node graph-W"><circle cx="260" cy="240" r="26" /><text x="260" y="238" textAnchor="middle">(1,0)</text><text x="260" y="255" textAnchor="middle" className="tag">W</text></g>
+    <g className="graph-node graph-L"><circle cx="180" cy="340" r="26" /><text x="180" y="338" textAnchor="middle">(0,0)</text><text x="180" y="355" textAnchor="middle" className="tag">L</text></g>
+  </svg>
+);
+
 export const Solution = ({ onBack }: { onBack: () => void }) => (
   <Screen title="Общее решение">
     <section className="rules-section">
@@ -79,6 +104,66 @@ export const Solution = ({ onBack }: { onBack: () => void }) => (
         противник окажется в <b>L</b>, и любой его ход уведёт в <b>W</b> (свойство 3),
         откуда вы снова найдёте ход в <b>L</b>. Так продолжается до терминальной позиции,
         в которой проигрывает противник.
+      </p>
+    </section>
+
+    <section className="rules-section">
+      <h2 className="rules-h">🎯 Пример: раскраска (2, 1)</h2>
+      <p className="rules-p">
+        Применим правила к небольшой, но уже нетривиальной позиции — двум кучкам{" "}
+        <Code>(2, 1)</Code>. Разрешено за ход уменьшить любую <i>одну</i> кучку
+        на положительное число. Из <Code>(2, 1)</Code> достижимы шесть позиций:{" "}
+        <Code>(2,1)</Code>, <Code>(1,1)</Code>, <Code>(2,0)</Code>,{" "}
+        <Code>(0,1)</Code>, <Code>(1,0)</Code>, <Code>(0,0)</Code>. Перечислим
+        все рёбра:
+      </p>
+      <ul className="sol-list">
+        <li><Code>(2,1)</Code> → <Code>(1,1)</Code>, <Code>(0,1)</Code>, <Code>(2,0)</Code></li>
+        <li><Code>(1,1)</Code> → <Code>(0,1)</Code>, <Code>(1,0)</Code></li>
+        <li><Code>(2,0)</Code> → <Code>(1,0)</Code>, <Code>(0,0)</Code></li>
+        <li><Code>(0,1)</Code> → <Code>(0,0)</Code></li>
+        <li><Code>(1,0)</Code> → <Code>(0,0)</Code></li>
+      </ul>
+      <Graph21 />
+      <p className="rules-p">
+        Раскраску строим <b>обратной индукцией</b> — снизу вверх, от тупика. На
+        каждом шаге смотрим только на уже окрашенных потомков и применяем три
+        правила из предыдущего раздела:
+      </p>
+      <ol className="sol-list">
+        <li>
+          <Code>(0,0)</Code> — тупик (нет исходящих рёбер). По правилу 1 это{" "}
+          <b>L</b>: ходить нечем, текущий игрок проиграл.
+        </li>
+        <li>
+          <Code>(0,1)</Code> и <Code>(1,0)</Code> — единственный ход в каждой
+          ведёт в <Code>(0,0)</Code>, то есть в <b>L</b>. По правилу 2 обе
+          позиции — <b>W</b>.
+        </li>
+        <li>
+          <Code>(2,0)</Code> — есть ход в <Code>(0,0)</Code> [<b>L</b>], значит{" "}
+          <b>W</b>. (Второй ход ведёт в <Code>(1,0)</Code> [<b>W</b>], но для
+          правила 2 достаточно <i>одного</i> ребра в L.)
+        </li>
+        <li>
+          <Code>(1,1)</Code> — ходы только в <Code>(0,1)</Code> и{" "}
+          <Code>(1,0)</Code>, и оба потомка — <b>W</b>. <i>Все</i> рёбра ведут
+          в W → по правилу 3 это <b>L</b>: какой ход ни сделай, отдашь
+          сопернику выигрышную позицию.
+        </li>
+        <li>
+          <Code>(2,1)</Code> — среди потомков есть <Code>(1,1)</Code> [<b>L</b>],
+          поэтому <b>W</b>. Это и есть выигрывающий первый ход:{" "}
+          <i>уравнять кучки</i>, перейдя в <Code>(1,1)</Code>. Любой другой ход
+          ((2,1)→(0,1) или (2,1)→(2,0)) подарит сопернику ту же возможность.
+        </li>
+      </ol>
+      <p className="rules-p rules-hint">
+        Стратегия первого игрока на этом графе: ход в <Code>(1,1)</Code>. Дальше
+        соперник из L вынужден уйти в W (в <Code>(0,1)</Code> или{" "}
+        <Code>(1,0)</Code>), оттуда первый возвращает его в L —{" "}
+        <Code>(0,0)</Code> — и партия закончена. Шесть вершин, девять рёбер,
+        две L-позиции — ровно те, у которых кучки совпадают.
       </p>
     </section>
 

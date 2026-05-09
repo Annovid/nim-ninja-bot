@@ -372,9 +372,24 @@ html, body, #root {
   fill: var(--secondary);
   stroke: var(--hint);
 }
+.sol-graph .graph-W circle {
+  fill: rgba(76, 175, 80, 0.12);
+  stroke: #4caf50;
+}
+.sol-graph .graph-L circle {
+  fill: rgba(231, 76, 60, 0.14);
+  stroke: #e74c3c;
+}
 .sol-graph text {
   fill: var(--text);
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   font-size: 14px;
   font-weight: 600;
 }
+.sol-graph text.tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.sol-graph .graph-W text.tag { fill: #2e8540; }
+.sol-graph .graph-L text.tag { fill: #c0392b; }
