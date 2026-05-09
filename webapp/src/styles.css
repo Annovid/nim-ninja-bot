@@ -221,3 +221,160 @@ html, body, #root {
 .banner-win .banner-title { color: #34c759; }
 .banner-loss .banner-title { color: #ff3b30; }
 .banner-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+
+/* Rules screen */
+.rules-section {
+  background: var(--secondary);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rules-h {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+.rules-p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+.rules-hint {
+  font-size: 14px;
+  color: var(--hint);
+}
+
+.rules-board {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.rules-board-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+.rules-board-num {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.rules-pile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.rules-clip {
+  font-size: 18px;
+  line-height: 1;
+}
+.rules-clip-take {
+  background: rgba(255, 59, 48, 0.20);
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.rules-step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.rules-step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hint);
+}
+.rules-arrow {
+  text-align: center;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 4px 0;
+}
+
+/* Solution screen */
+.sol-code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.rules-section .sol-code { background: rgba(0, 0, 0, 0.04); }
+
+.sol-list {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.sol-pre {
+  background: var(--bg);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 4px 0;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.sol-xor-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin: 4px 0;
+}
+.sol-xor-table > div {
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.sol-graph {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 6px auto;
+  display: block;
+  color: var(--accent);
+}
+.sol-graph .graph-node circle {
+  fill: var(--bg);
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.sol-graph .graph-terminal circle {
+  fill: var(--secondary);
+  stroke: var(--hint);
+}
+.sol-graph text {
+  fill: var(--text);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
